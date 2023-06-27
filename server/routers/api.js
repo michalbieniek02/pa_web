@@ -6,18 +6,22 @@ const router = Router();
 router.route("/todo")
     .get(async (req, res) => {
         const todos = await ToDo.find();
-        res.json(todos);
+        res.status(200).send(todos);
     })
     .post(async (req, res) => {
-        const { categoryID, title, comment } = req.body;
-        const todo = new ToDo({
-            categoryID,
-            title,
-            comment,
-            createdAt: new Date(),
-        });
-        await todo.save();
-        res.json(todo);
+        try {
+            const { title, comment } = req.body;
+            const todo = new ToDo({
+                title,
+                comment,
+                createdAt: new Date(),
+            });
+            await todo.save();
+            res.status(200).send(todo);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send(error.message);
+        }
     });
 
 export { router };

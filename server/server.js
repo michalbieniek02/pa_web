@@ -6,6 +6,7 @@ import cors from "cors";
 import { router as apiRouter} from "./routers/api.js";
 
 const { MONGO_URL, PORT } = process.env;
+
 const corsPolicy = {
     origin: "http://localhost:3000",
     headers: "Content-Type, Authorization",
@@ -21,12 +22,6 @@ app.use(cors(corsPolicy));
 app.use(express.json());
 
 app.use("/api", apiRouter);
-
-app.get("/", (req, res) => {
-    res.send("Hello World");
-});
-
-
 
 (async () => {
     await mongoose.connect(MONGO_URL);
