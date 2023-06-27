@@ -41,9 +41,9 @@ button[type="button"] {
   color: white;
   border: none;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 button[type="button"]:hover {
   background-color: #0069d9;
-  margin-bottom: 1rem;
 }

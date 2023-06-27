@@ -8,7 +8,7 @@ const ToDoList = () => {
         fetchList();
     }, []);
 
-    const fetchList = async () => {
+    const fetchList = () => {
         fetch('/api/todo')
             .then((response) => response.json())
             .then((data) => setList(data))
