@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import { router as apiRouter} from "./routers/api.js";
+import { router as apiRouter } from "./routers/api.js";
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -24,9 +24,17 @@ app.use(express.json());
 app.use("/api", apiRouter);
 
 (async () => {
-    await mongoose.connect(MONGO_URL);
+    try {
+        await mongoose.connect(MONGO_URL, {
+            serverSelectionTimeoutMS: 5000,
+        });
 
-    app.listen(PORT, () => {
-        console.log(`Server listening on port ${PORT}`);
-    });
+        app.listen(PORT, () => {
+            console.log(`Server listening on port ${PORT}`);
+        });
+    }
+    catch (error) {
+        console.error(error);
+        app.close();
+    }
 })();

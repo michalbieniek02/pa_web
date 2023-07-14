@@ -14,7 +14,6 @@ router.route("/todo")
             const todo = new ToDo({
                 title,
                 comment,
-                createdAt: new Date(),
             });
             await todo.save();
             res.status(200).send(todo);
