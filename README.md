@@ -1,1 +1,1 @@
-No starter code is provided. Start from scratch!
+Code is provided for PA purposes only.
